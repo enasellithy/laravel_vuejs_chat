@@ -25,4 +25,4 @@ Route::get('chat','MessageController@index');
 Route::get('getChats','MessageController@getChats');
 Route::post('sendchat','MessageController@saveUserChat');
 
-Route::get('notfy','NotificationController@notfy');
+Route::get('sendNotify','NotificationController@sendNotify');

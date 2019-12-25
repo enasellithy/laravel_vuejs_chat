@@ -2,12 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Notification;
+use App\Chat;
+use App\Events\SendNotification;
+use App\Notifications;
+use App\Notifications\TestNotification;
+use Illuminate\Mail\Events\MessageSent;
+use Notification;
 use App\User;
 use Illuminate\Http\Request;
 
 class NotificationController extends Controller
 {
+    public function sendNotify()
+    {
+        $nots = Notifications::latest()->first();
+        $data = [
+            'user_id' => $nots->user_id,
+            'title' => $nots->title,
+        ];
+//        $chat = Chat::create($data);
+//        $finalData = Chat::where('id', $chat->id)->first();
+        broadcast(new SendNotification($nots->load('user')))->toOthers();
+        return response(['data' => $data], 201);
+    }
     public function notfy()
     {
         $tokens=null;
