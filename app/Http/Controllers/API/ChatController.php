@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Validator;
 
 class ChatController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $chats = Chat::with('user')->get();

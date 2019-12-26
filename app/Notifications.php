@@ -8,7 +8,7 @@ class Notifications extends Model
 {
     protected $table = 'notifications';
 
-    protected $fillable = ['title','body','type','is_read','user_id','order_id','order_id'];
+    protected $fillable = ['title','body','type','is_read','user_id','order_id'];
 
     public function user(){
         return $this->belongsTo(User::class,'user_id');
